@@ -15,7 +15,6 @@ import { AuthContext } from "../context/AuthContext";
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
-  const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -31,7 +30,7 @@ const Search = () => {
         setUser(doc.data());
       });
     } catch (err) {
-      setErr(true);
+      console.log(err);
     }
   };
 
@@ -87,7 +86,7 @@ const Search = () => {
           value={username}
         />
       </div>
-      {err && <span>User not found!</span>}
+      {!user && <span>User Not Found!</span>}
       {user && (
         <div className="userChat" onClick={handleSelect}>
           <img src={user.photoURL} alt="" />
